@@ -78,7 +78,8 @@ app.post("/admin/crateorder", async (req, res) => {
 });
 
 // server host at
+const port = process.env.PORT || 3000;
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log("server run on port 3001");
 });
