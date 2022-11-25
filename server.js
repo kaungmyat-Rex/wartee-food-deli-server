@@ -2,9 +2,9 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Usemodel = require("../server/models/menu");
-const Adminmodel = require("../server/models/admin");
-const orderList = require("../server/models/orderList");
+const Usemodel = require("./menu");
+const Adminmodel = require("./admin");
+const orderList = require("./orderList");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
