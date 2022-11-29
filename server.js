@@ -77,6 +77,12 @@ app.post("/admin/crateorder", async (req, res) => {
   res.json(food);
 });
 
+app.delete("/admin/delete/:id", async (req, res) => {
+  const orderId = req.params.id;
+  const orderDel = await orderList.findByIdAndDelete(orderId);
+  res.json(orderDel);
+});
+
 // server host at
 const port = process.env.PORT || 3000;
 
