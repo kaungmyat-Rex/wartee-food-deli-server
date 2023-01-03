@@ -8,9 +8,7 @@ const orderList = require("./orderList");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-mongoose.connect(
-  "mongodb+srv://admin:wartee@cluster0.luh5ncd.mongodb.net/WarteeFoodOrder?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.DATA_BASE);
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
