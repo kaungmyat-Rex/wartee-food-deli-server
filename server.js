@@ -1,17 +1,23 @@
-const { response } = require("express");
+const { response, Router } = require("express");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Usemodel = require("./menu");
+// admin database
 const Adminmodel = require("./admin");
 const orderList = require("./orderList");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 mongoose.connect(process.env.DATA_BASE);
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
+
+require("./passport")(passport);
 
 app.get("/getmenu", async (req, res) => {
   //   Usemodel.find({}, (err, result) => {
@@ -79,6 +85,17 @@ app.delete("/admin/delete/:id", async (req, res) => {
   const orderId = req.params.id;
   const orderDel = await orderList.findByIdAndDelete(orderId);
   res.json(orderDel);
+});
+
+app.post("/login", (req, res, next) => {
+  // under line come from passport.js
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    if (!user) res.send(false);
+    else {
+      res.send(true);
+    }
+  })(req, res, next);
 });
 
 // server host at
