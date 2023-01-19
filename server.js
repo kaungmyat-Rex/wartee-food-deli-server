@@ -11,7 +11,9 @@ const cors = require("cors");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
-mongoose.connect(process.env.DATA_BASE);
+mongoose.connect(
+  "mongodb+srv://admin:wartee@cluster0.luh5ncd.mongodb.net/WarteeFoodOrder?retryWrites=true&w=majority"
+);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -99,7 +101,7 @@ app.post("/login", (req, res, next) => {
 });
 
 // server host at
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
 app.listen(port, () => {
   console.log("server run on port 3001");
